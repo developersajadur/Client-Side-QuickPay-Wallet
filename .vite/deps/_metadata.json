@@ -1,0 +1,55 @@
+{
+  "hash": "e9440cb4",
+  "configHash": "a4b2f0bc",
+  "lockfileHash": "e3b0c442",
+  "browserHash": "64dd5ce3",
+  "optimized": {
+    "@tanstack/react-query": {
+      "src": "../../node_modules/@tanstack/react-query/build/modern/index.js",
+      "file": "@tanstack_react-query.js",
+      "fileHash": "fb98b7ff",
+      "needsInterop": false
+    },
+    "flowbite-react": {
+      "src": "../../node_modules/flowbite-react/dist/esm/index.mjs",
+      "file": "flowbite-react.js",
+      "fileHash": "bbdb72cf",
+      "needsInterop": false
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "01aaee94",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "4720f2e3",
+      "needsInterop": true
+    },
+    "react-hook-form": {
+      "src": "../../node_modules/react-hook-form/dist/index.esm.mjs",
+      "file": "react-hook-form.js",
+      "fileHash": "91ae76fc",
+      "needsInterop": false
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "1bc78328",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-MPJEOMTP": {
+      "file": "chunk-MPJEOMTP.js"
+    },
+    "chunk-M5IPRDD5": {
+      "file": "chunk-M5IPRDD5.js"
+    },
+    "chunk-TJW4JA7A": {
+      "file": "chunk-TJW4JA7A.js"
+    }
+  }
+}
