@@ -1,17 +1,45 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Label, TextInput, Button, Card, Alert } from 'flowbite-react';
+import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+
+const api = import.meta.env.VITE_API_URL;
 
 const Login = () => {
+  const axiosSecure = useAxiosSecure();
+
+  const [users, setUsers] = useState([]);
+  console.log(users);
+  
+  useEffect(() => {
+    axiosSecure.get("/users")
+      .then(data => setUsers(data?.data));
+  }, [axiosSecure]);
+
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const onSubmit = (data) => {
-    // Handle form submission
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post(`${api}/login`, data);
+      const token = response.data.token;
+      
+      if (token) {
+        localStorage.setItem('token', token); // Store the token
+        toast.success('Successfully logged in!');
+        // Optionally, redirect to another page
+      } else {
+        toast.error('Invalid credentials. Please try again.');
+      }
+    } catch (error) {
+      toast.error('An error occurred. Please try again.');
+    }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <Toaster position="top-center" reverseOrder={false} />
       <Card className="w-96 p-6">
         <h1 className="text-2xl font-bold mb-4 text-center">Login</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
