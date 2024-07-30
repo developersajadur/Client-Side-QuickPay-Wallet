@@ -1,21 +1,13 @@
-import { Button } from "flowbite-react";
-import { useNavigate } from "react-router-dom";
-
+import ActionCards from "./ActionCards";
+import BalanceCard from "./BalanceCard";
 
 const HomePage = () => {
-    const navigate = useNavigate(); // Initialize useNavigate
-
-    const handleLogout = () => {
-        // Logout logic here
-        localStorage.removeItem("token");
-        navigate("/login");
-        
-    }
 
     return (
-        <div className="flex">
-           <button onClick={handleLogout} className="primary">Logout</button>
-        </div>
+         <div className="px-2 md:px-5 lg:px-10">
+            <BalanceCard/>
+            <ActionCards/>
+         </div>
     );
 };
 
