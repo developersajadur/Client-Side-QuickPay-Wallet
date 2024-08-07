@@ -43,8 +43,6 @@ const Register = () => {
       if (response.data.insertedId) {
         toast.success('Successfully registered!');
         navigate('/login'); // Redirect to login page
-      } else {
-        toast.error('Registration failed. Please try again.');
       }
     } catch (error) {
       toast.error('An error occurred. Please try again.');

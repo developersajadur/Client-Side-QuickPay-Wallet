@@ -4,6 +4,9 @@ import Root from "../Layout/Root";
 import Login from "../Pages/Auth/Login";
 import HomePage from "../Pages/Home/HomePage";
 import SecureRoute from "../SecureRoutes/SecureRoute";
+import WalletCards from "../Pages/WalletCards/WalletCards";
+import Transactions from "../Pages/Transactions/Transactions";
+import AddMoney from "../Pages/AddMoney/AddMoney";
 
 export const router = createBrowserRouter([
   {
@@ -13,8 +16,27 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element:<HomePage />,
-        // element: <SecureRoute><HomePage /></SecureRoute>,
       },
+      // {
+      //   path: "/withdraw",
+      //   element:<Withdraw/>,
+      // },
+      {
+        path: "/cards",
+        element:<WalletCards/>,
+      },
+      {
+        path: "/transactions",
+        element:<Transactions/>,
+      },
+      {
+        path: "/add-money",
+        element:<AddMoney/>,
+      },
+      // {
+      //   path: "/sent-money",
+      //   element:<SendMoney/>,
+      // },
     ],
   },
   {

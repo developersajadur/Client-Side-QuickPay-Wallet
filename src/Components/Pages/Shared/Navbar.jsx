@@ -1,27 +1,29 @@
 import { Button } from "flowbite-react";
 import { NavLink, useNavigate } from "react-router-dom";
+import useUser from "../../Hooks/useUser";
 
 
-const navLinks = [
-    {
-        name: "Cash In",
-        path:"/cash-in"
-    },
-    {
-        name: "Sent Money",
-        path:"/sent-money"
-    },
-    {
-        name: "Cash Out",
-        path:"/cash-out"
-    },
-    {
-        name: "Transactions",
-        path:"/transactions"
-    },
-]
+// const navLinks = [
+//     {
+//         name: "Cash In",
+//         path:"/cash-in"
+//     },
+//     {
+//         name: "Sent Money",
+//         path:"/sent-money"
+//     },
+//     {
+//         name: "Cash Out",
+//         path:"/cash-out"
+//     },
+//     {
+//         name: "Transactions",
+//         path:"/transactions"
+//     },
+// ]
 
 const Navbar = () => {
+    const {user} = useUser();
     const navigate = useNavigate(); // Initialize useNavigate
 
     const handleLogout = () => {
@@ -37,19 +39,13 @@ const Navbar = () => {
                 <h1 className="text-3xl font-semibold">Quick Pay</h1>
                 <div className="flex items-center gap-10">
                     <div className="">
-                    <h2 className="text-xl font-medium">Hi, Sajadur Rahman</h2>
+                    <h2 className="text-xl font-medium">Hi, {user?.name}</h2>
                     </div>
                     <div className="">
                     <Button onClick={handleLogout} className='bg-blue-500 w-full' type="submit">Logout</Button>
                     </div>
                 </div>
             </div>
-            {/* {
-                navLinks.map((link, index) => (
-                    // <a key={index} href={link.path}>{link.name}</a>
-                    <NavLink key={index} to={link.path}>{link.name}</NavLink>
-                ))
-            } */}
         </div>
     );
 };
