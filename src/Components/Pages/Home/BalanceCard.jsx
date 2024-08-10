@@ -9,7 +9,7 @@ const BalanceCard = () => {
           <div className="bg-white shadow-md w-1/2 h-60 rounded-lg p-6 flex items-start justify-between">
       <div>
         <div className="text-gray-600">Your Wallet</div>
-        <div className="text-2xl font-bold">$1,450.50</div>
+        <div className="text-2xl font-bold">{user?.balance} BDT</div>
       </div>
     {
       user.role === 'agent' ? null : (

@@ -1,17 +1,23 @@
-// Modal.js
-import { Button, Modal } from 'flowbite-react';
 import React from 'react';
+import { Modal, Button } from 'flowbite-react';
+import '../../index.css'; // Ensure you import your custom styles
 
 const PaymentModal = ({ show, onClose, title, children }) => {
+  if (!show) return null;
+
   return (
-    <Modal show={show} onClose={onClose}>
-      <Modal.Header>{title}</Modal.Header>
+    <Modal show={show} onClose={onClose} size="md" id='modal-bg'>
+      <Modal.Header>
+        {title}
+      </Modal.Header>
       <Modal.Body>
-        <div className="space-y-6">{children}</div>
+        {children}
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={onClose}>Close</Button>
-      </Modal.Footer>
+      {/* <Modal.Footer>
+        <Button color="gray" onClick={onClose}>
+          Close
+        </Button>
+      </Modal.Footer> */}
     </Modal>
   );
 };

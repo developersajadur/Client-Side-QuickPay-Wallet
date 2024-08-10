@@ -3,3 +3,9 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 @import "flowbite";
+
+
+#modal-bg{
+    background-color:transparent ;
+    backdrop-filter: blur(5px);
+}

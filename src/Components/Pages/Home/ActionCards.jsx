@@ -1,5 +1,5 @@
 // ActionCards.js
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FaArrowDown, FaArrowRight, FaCreditCard, FaExchangeAlt } from 'react-icons/fa';
 import { IoMdGitPullRequest } from 'react-icons/io';
 import useUser from '../../Hooks/useUser';
@@ -14,14 +14,9 @@ const ActionCards = () => {
   const [modalContent, setModalContent] = useState(null);
 
   const handleWithdraw = (data) => {
-    // Handle withdraw logic
-    console.log('Withdraw:', data);
-    setShowModal(false);
   };
 
   const handleSendMoney = (data) => {
-    // Handle send money logic
-    console.log('Send Money:', data);
     setShowModal(false);
   };
 
