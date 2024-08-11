@@ -22,8 +22,10 @@ const ActionCards = () => {
 
   const cards = user.role === 'agent'
     ? [
+      { icon: <FaArrowDown className="text-purple-600" />, label: 'Withdraw', bgColor: 'bg-purple-50', action: 'withdraw' },
+      { icon: <FaArrowRight className="text-orange-600" />, label: 'Send', bgColor: 'bg-orange-50', action: 'sendMoney' },
         { icon: <IoMdGitPullRequest className="text-purple-600" />, label: 'Request', bgColor: 'bg-purple-50' },
-        { icon: <FaExchangeAlt className="text-red-600" />, label: 'Transactions', bgColor: 'bg-red-50' }
+        { icon: <FaExchangeAlt className="text-red-600" />, label: 'Transactions', bgColor: 'bg-red-50' },
       ]
     : [
         { icon: <FaArrowDown className="text-purple-600" />, label: 'Withdraw', bgColor: 'bg-purple-50', action: 'withdraw' },

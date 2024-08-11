@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { Button, Label, TextInput, Alert } from 'flowbite-react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import useUser from '../../Hooks/useUser';
+import toast from 'react-hot-toast';
 
 const SendMoneyForm = () => {
   const axiosSecure = useAxiosSecure();
@@ -9,9 +10,7 @@ const SendMoneyForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
 
-  const onSubmit = async (data) => {
-    console.log(data);
-    
+  const onSubmit = async (data) => {    
     try {
       const response = await axiosSecure.post('/sendMoney', {
         senderId: user.id,
@@ -23,9 +22,11 @@ const SendMoneyForm = () => {
           email: user.email, 
         }
       });
-  
-      console.log('Transaction Successful:', response.data);
+      if(response.status === 200) {
+        toast.success('Transaction Successful')
+      }
     } catch (error) {
+      toast.error(`${error.response ? error.response.data : error.message}`);
       console.error('Transaction Failed:', error.response ? error.response.data : error.message);
     }
   };

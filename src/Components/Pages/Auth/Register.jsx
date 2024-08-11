@@ -35,7 +35,6 @@ const Register = () => {
         mobileNumber: data.mobileNumber,
         pin: data.pin,
         balance: 0,
-        transactions: [],
         status: 'pending',
         role: 'user',
       }
