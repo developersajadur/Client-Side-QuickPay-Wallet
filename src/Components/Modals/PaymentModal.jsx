@@ -13,11 +13,6 @@ const PaymentModal = ({ show, onClose, title, children }) => {
       <Modal.Body>
         {children}
       </Modal.Body>
-      {/* <Modal.Footer>
-        <Button color="gray" onClick={onClose}>
-          Close
-        </Button>
-      </Modal.Footer> */}
     </Modal>
   );
 };

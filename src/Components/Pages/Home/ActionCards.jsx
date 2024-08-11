@@ -13,17 +13,22 @@ const ActionCards = () => {
   const [modalTitle, setModalTitle] = useState('');
   const [modalContent, setModalContent] = useState(null);
 
-  const handleWithdraw = (data) => {
+  const handleWithdraw = () => {
+    setModalTitle('Withdraw Money');
+    setModalContent(<WithdrawForm onClose={() => setShowModal(false)} />); 
+    setShowModal(true);
   };
 
-  const handleSendMoney = (data) => {
-    setShowModal(false);
+  const handleSendMoney = () => {
+    setModalTitle('Send Money');
+    setModalContent(<SendMoneyForm onClose={() => setShowModal(false)} />);
+    setShowModal(true);
   };
 
   const cards = user.role === 'agent'
     ? [
-      { icon: <FaArrowDown className="text-purple-600" />, label: 'Withdraw', bgColor: 'bg-purple-50', action: 'withdraw' },
-      { icon: <FaArrowRight className="text-orange-600" />, label: 'Send', bgColor: 'bg-orange-50', action: 'sendMoney' },
+        { icon: <FaArrowDown className="text-purple-600" />, label: 'Withdraw', bgColor: 'bg-purple-50', action: 'withdraw' },
+        { icon: <FaArrowRight className="text-orange-600" />, label: 'Send', bgColor: 'bg-orange-50', action: 'sendMoney' },
         { icon: <IoMdGitPullRequest className="text-purple-600" />, label: 'Request', bgColor: 'bg-purple-50' },
         { icon: <FaExchangeAlt className="text-red-600" />, label: 'Transactions', bgColor: 'bg-red-50' },
       ]
@@ -31,20 +36,16 @@ const ActionCards = () => {
         { icon: <FaArrowDown className="text-purple-600" />, label: 'Withdraw', bgColor: 'bg-purple-50', action: 'withdraw' },
         { icon: <FaArrowRight className="text-orange-600" />, label: 'Send', bgColor: 'bg-orange-50', action: 'sendMoney' },
         { icon: <FaCreditCard className="text-blue-600" />, label: 'Cards', bgColor: 'bg-blue-50' },
-        { icon: <FaExchangeAlt className="text-red-600" />, label: 'Transactions', bgColor: 'bg-red-50' }
+        { icon: <FaExchangeAlt className="text-red-600" />, label: 'Transactions', bgColor: 'bg-red-50' },
       ];
 
   const handleCardClick = (action) => {
     switch (action) {
       case 'withdraw':
-        setModalTitle('Withdraw Money');
-        setModalContent(<WithdrawForm onSubmit={handleWithdraw} />);
-        setShowModal(true);
+        handleWithdraw();
         break;
       case 'sendMoney':
-        setModalTitle('Send Money');
-        setModalContent(<SendMoneyForm onSubmit={handleSendMoney} />);
-        setShowModal(true);
+        handleSendMoney();
         break;
       default:
         setShowModal(false);

@@ -4,13 +4,12 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import useUser from '../../Hooks/useUser';
 import toast from 'react-hot-toast';
 
-const SendMoneyForm = () => {
+const SendMoneyForm = ({ onClose }) => { // Accept onClose prop
   const axiosSecure = useAxiosSecure();
-  const {user} = useUser();
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { user } = useUser();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm(); // Include reset function
 
-
-  const onSubmit = async (data) => {    
+  const onSubmit = async (data) => {
     try {
       const response = await axiosSecure.post('/sendMoney', {
         senderId: user.id,
@@ -19,11 +18,14 @@ const SendMoneyForm = () => {
         pin: data.pin,
       }, {
         headers: {
-          email: user.email, 
+          email: user.email,
         }
       });
-      if(response.status === 200) {
-        toast.success('Transaction Successful')
+
+      if (response.status === 200) {
+        toast.success('Transaction Successful');
+        reset(); // Reset form fields
+        onClose(); // Close the modal
       }
     } catch (error) {
       toast.error(`${error.response ? error.response.data : error.message}`);
@@ -33,18 +35,16 @@ const SendMoneyForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
-      {/* <h2 className="text-2xl font-semibold mb-4 text-center">Send Money</h2> */}
-
       <div className="mb-4">
-        <Label htmlFor="Receiver Number" value="Receiver Number" className="mb-2 block" />
+        <Label htmlFor="receiverNumber" value="Receiver Number" className="mb-2 block" />
         <TextInput
-          id="recipient"
+          id="receiverNumber"
           type="number"
           placeholder="Enter Receiver Number"
-          color={errors.recipient ? 'failure' : 'default'}
-          {...register('receiverNumber', { required: 'Recipient is required' })}
+          color={errors.receiverNumber ? 'failure' : 'default'}
+          {...register('receiverNumber', { required: 'Receiver Number is required' })}
         />
-        {errors.recipient && <Alert color="failure" className="mt-2 py-1">{errors.recipient.message}</Alert>}
+        {errors.receiverNumber && <Alert color="failure" className="mt-2 py-1">{errors.receiverNumber.message}</Alert>}
       </div>
 
       <div className="mb-4">
