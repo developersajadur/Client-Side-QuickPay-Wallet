@@ -1,4 +1,4 @@
-// ActionCards.js
+// src/Components/ActionCards/ActionCards.js
 import { useState } from 'react';
 import { FaArrowDown, FaArrowRight, FaCreditCard, FaExchangeAlt } from 'react-icons/fa';
 import { IoMdGitPullRequest } from 'react-icons/io';
@@ -6,16 +6,18 @@ import useUser from '../../Hooks/useUser';
 import WithdrawForm from '../Withdraw/WithdrawForm';
 import SendMoneyForm from '../SendMoney/SendMoneyForm';
 import PaymentModal from '../../Modals/PaymentModal';
+import TransactionModal from '../Transactions/TransactionModal';
 
 const ActionCards = () => {
   const { user } = useUser();
   const [showModal, setShowModal] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
   const [modalContent, setModalContent] = useState(null);
+  const [showTransactionsModal, setShowTransactionsModal] = useState(false);
 
   const handleWithdraw = () => {
     setModalTitle('Withdraw Money');
-    setModalContent(<WithdrawForm onClose={() => setShowModal(false)} />); 
+    setModalContent(<WithdrawForm onClose={() => setShowModal(false)} />);
     setShowModal(true);
   };
 
@@ -25,18 +27,22 @@ const ActionCards = () => {
     setShowModal(true);
   };
 
+  const handleTransactions = () => {
+    setShowTransactionsModal(true);
+  };
+
   const cards = user.role === 'agent'
     ? [
         { icon: <FaArrowDown className="text-purple-600" />, label: 'Withdraw', bgColor: 'bg-purple-50', action: 'withdraw' },
         { icon: <FaArrowRight className="text-orange-600" />, label: 'Send', bgColor: 'bg-orange-50', action: 'sendMoney' },
         { icon: <IoMdGitPullRequest className="text-purple-600" />, label: 'Request', bgColor: 'bg-purple-50' },
-        { icon: <FaExchangeAlt className="text-red-600" />, label: 'Transactions', bgColor: 'bg-red-50' },
+        { icon: <FaExchangeAlt className="text-red-600" />, label: 'Transactions', bgColor: 'bg-red-50', action: 'transactions' },
       ]
     : [
         { icon: <FaArrowDown className="text-purple-600" />, label: 'Withdraw', bgColor: 'bg-purple-50', action: 'withdraw' },
         { icon: <FaArrowRight className="text-orange-600" />, label: 'Send', bgColor: 'bg-orange-50', action: 'sendMoney' },
         { icon: <FaCreditCard className="text-blue-600" />, label: 'Cards', bgColor: 'bg-blue-50' },
-        { icon: <FaExchangeAlt className="text-red-600" />, label: 'Transactions', bgColor: 'bg-red-50' },
+        { icon: <FaExchangeAlt className="text-red-600" />, label: 'Transactions', bgColor: 'bg-red-50', action: 'transactions' },
       ];
 
   const handleCardClick = (action) => {
@@ -46,6 +52,9 @@ const ActionCards = () => {
         break;
       case 'sendMoney':
         handleSendMoney();
+        break;
+      case 'transactions':
+        handleTransactions();
         break;
       default:
         setShowModal(false);
@@ -72,6 +81,12 @@ const ActionCards = () => {
       >
         {modalContent}
       </PaymentModal>
+
+      <TransactionModal
+        show={showTransactionsModal}
+        onClose={() => setShowTransactionsModal(false)}
+        userEmail={user.email}
+      />
     </div>
   );
 };

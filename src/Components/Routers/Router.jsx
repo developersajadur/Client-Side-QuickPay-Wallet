@@ -5,7 +5,6 @@ import Login from "../Pages/Auth/Login";
 import HomePage from "../Pages/Home/HomePage";
 import SecureRoute from "../SecureRoutes/SecureRoute";
 import WalletCards from "../Pages/WalletCards/WalletCards";
-import Transactions from "../Pages/Transactions/Transactions"; 
 
 export const router = createBrowserRouter([
   {
@@ -24,10 +23,10 @@ export const router = createBrowserRouter([
         path: "/cards",
         element:<WalletCards/>,
       },
-      {
-        path: "/transactions",
-        element:<Transactions/>,
-      },
+      // {
+      //   path: "/transactions",
+      //   element:<TransactionModal/>,
+      // },
       // {
       //   path: "/add-money",
       //   element:<AddMoney/>,
