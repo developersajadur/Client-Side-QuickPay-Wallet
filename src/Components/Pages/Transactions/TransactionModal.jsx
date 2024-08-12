@@ -29,12 +29,11 @@ const TransactionModal = ({ show, onClose }) => {
       fetchTransactions();
     }
   }, [show, user.email, axiosSecure]);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error loading transactions: {error.message}</div>;
+//   if (error) return <div>Error loading transactions: {error.message}</div>;
 
   return (
     <Modal show={show} onClose={onClose} size="2xl" id='modal-bg'>
+        
       <Modal.Header>Transactions</Modal.Header>
       <Modal.Body>
         <div className='h-96 overflow-auto'>
@@ -52,12 +51,17 @@ const TransactionModal = ({ show, onClose }) => {
                         {transaction.type === 'debit' 
                           ? `You Sent ${transaction.amount} BDT To ${transaction.receiverNumber} On ${date}`
                           : transaction.type === 'credit'
-                          ? `You Received ${transaction.amount} BDT From ${transaction.receiverNumber} On ${date}`
+                          ? `You Received ${transaction.amount} BDT From ${transaction.senderNumber} On ${date}`
                           : transaction.type === 'withdraw'
                           ? `You Withdraw ${transaction.amount} BDT From ${transaction.toAgent} On ${date}`
                           : transaction.type === 'cashIn'
                           ? `You Cashed In ${transaction.amount} BDT From ${transaction.fromUser} On ${date}`
-                          : 'Unknown transaction type'}
+                          : transaction.type === 'cash-in-user'
+                          ? `You Cashed In ${transaction.amount} BDT From ${transaction.toAgent} On ${date}`
+                          : transaction.type === 'cash-in-agent'
+                          ? `You Cashed In ${transaction.amount} BDT To ${transaction.toUser} On ${date}`
+                          : 'Unknown transaction type'
+                          }
                       </Table.Cell>
                     </Table.Row>
                   );

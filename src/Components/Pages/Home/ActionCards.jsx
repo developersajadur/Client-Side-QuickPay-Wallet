@@ -1,4 +1,3 @@
-// src/Components/ActionCards/ActionCards.js
 import { useState } from 'react';
 import { FaArrowDown, FaArrowRight, FaCreditCard, FaExchangeAlt } from 'react-icons/fa';
 import { IoMdGitPullRequest } from 'react-icons/io';
@@ -7,6 +6,7 @@ import WithdrawForm from '../Withdraw/WithdrawForm';
 import SendMoneyForm from '../SendMoney/SendMoneyForm';
 import PaymentModal from '../../Modals/PaymentModal';
 import TransactionModal from '../Transactions/TransactionModal';
+import RequestModal from '../Request/RequestModal';
 
 const ActionCards = () => {
   const { user } = useUser();
@@ -14,6 +14,7 @@ const ActionCards = () => {
   const [modalTitle, setModalTitle] = useState('');
   const [modalContent, setModalContent] = useState(null);
   const [showTransactionsModal, setShowTransactionsModal] = useState(false);
+  const [showRequestModal, setShowRequestModal] = useState(false); // Add state for RequestModal
 
   const handleWithdraw = () => {
     setModalTitle('Withdraw Money');
@@ -31,11 +32,15 @@ const ActionCards = () => {
     setShowTransactionsModal(true);
   };
 
+  const handleRequest = () => {
+    setShowRequestModal(true);
+  };
+
   const cards = user.role === 'agent'
     ? [
         { icon: <FaArrowDown className="text-purple-600" />, label: 'Withdraw', bgColor: 'bg-purple-50', action: 'withdraw' },
         { icon: <FaArrowRight className="text-orange-600" />, label: 'Send', bgColor: 'bg-orange-50', action: 'sendMoney' },
-        { icon: <IoMdGitPullRequest className="text-purple-600" />, label: 'Request', bgColor: 'bg-purple-50' },
+        { icon: <IoMdGitPullRequest className="text-purple-600" />, label: 'Request', bgColor: 'bg-purple-50', action: 'request' },
         { icon: <FaExchangeAlt className="text-red-600" />, label: 'Transactions', bgColor: 'bg-red-50', action: 'transactions' },
       ]
     : [
@@ -56,13 +61,17 @@ const ActionCards = () => {
       case 'transactions':
         handleTransactions();
         break;
+      case 'request':
+        handleRequest(); // Add this line to handle the request action
+        break;
       default:
         setShowModal(false);
     }
   };
 
   return (
-    <div className="flex gap-5 lg:gap-20 justify-center mt-10">
+    <div className="w-full flex flex-col justify-center items-center">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-fit gap-5 lg:gap-20 justify-center items-center mt-10">
       {cards.map((card, index) => (
         <button
           key={index}
@@ -87,6 +96,13 @@ const ActionCards = () => {
         onClose={() => setShowTransactionsModal(false)}
         userEmail={user.email}
       />
+
+      <RequestModal 
+        show={showRequestModal}
+        onClose={() => setShowRequestModal(false)}
+        userEmail={user.email}
+      />
+    </div>
     </div>
   );
 };
