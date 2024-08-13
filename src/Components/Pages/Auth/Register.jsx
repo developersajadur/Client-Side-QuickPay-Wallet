@@ -38,18 +38,15 @@ const Register = () => {
         status: 'pending',
         role: 'user',
       }
-      const response = await axios.post(`${api}/users`, dataToSend, );
-      if (response.data.insertedId) {
+
+      const response = await axios.post(`${api}/users`, dataToSend);
+      if (response.data.token) {
         const token = response.data.token;
-        if (token) {
-          localStorage.setItem('token', token); // Store the token
-         if(localStorage.getItem('token') === token) {
-          toast.success('Successfully registered!');
-          navigate('/'); 
-         }
-        } else {
-          toast.error('Invalid credentials. Please try again.');
-        }
+        localStorage.setItem('token', token); // Store the token
+        toast.success('Successfully registered!');
+        navigate('/'); 
+      } else {
+        toast.error('Error registering user. Please try again.');
       }
     } catch (error) {
       toast.error('An error occurred. Please try again.');
