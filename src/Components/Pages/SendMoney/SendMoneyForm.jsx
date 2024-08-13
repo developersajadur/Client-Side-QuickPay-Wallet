@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 const SendMoneyForm = ({ onClose }) => { // Accept onClose prop
   const axiosSecure = useAxiosSecure();
   const { user } = useUser();
-  const { register, handleSubmit, formState: { errors }, reset } = useForm(); // Include reset function
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   const onSubmit = async (data) => {
     try {

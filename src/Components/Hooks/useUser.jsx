@@ -26,15 +26,15 @@ const useUser = () => {
     queryFn: async () => {
       try {
         const { data } = await axiosSecure.get(`/users/${userEmail}`);
-        return data; // Return the data fetched from the API
+        return data;
       } catch (error) {
         console.error('Error fetching users:', error);
-        throw error; // Throw error to let React Query handle it
+        throw error; 
       }
     },
   });
 
-  return { user, error, isLoading }; // Return users, error, and loading state
+  return { user, error, isLoading }; 
 };
 
 export default useUser;

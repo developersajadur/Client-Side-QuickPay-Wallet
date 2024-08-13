@@ -38,7 +38,7 @@ const Register = () => {
         status: 'pending',
         role: 'user',
       }
-      const response = await axios.post(`${api}/users`, dataToSend);
+      const response = await axios.post(`${api}/users`, dataToSend, );
       if (response.data.insertedId) {
         toast.success('Successfully registered!');
         navigate('/login'); // Redirect to login page

@@ -14,7 +14,7 @@ const BalanceCard = () => {
 
   return (
     <div className="flex flex-col justify-center items-center mt-5">
-      <div className="bg-white shadow-md w-1/2 h-60 rounded-lg p-6 flex items-start justify-between">
+      <div className="bg-white shadow-md w-full md:w-1/2 lg:w-1/2 h-40 md:h-60 rounded-lg p-6 flex flex-col md:flex-row items-start justify-between">
         <div>
           <div className="text-gray-600">Your Wallet</div>
           <div className="text-2xl font-bold">{user?.balance} BDT</div>
