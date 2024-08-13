@@ -14,9 +14,9 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await axiosSecure.get("/users" || []);
-      const emailExists = res.data.some(user => user.email === data.email);
-      const mobileNumberExists = res.data.some(user => user.mobileNumber === data.mobileNumber);
+      // Fetch all users using POST method
+      const res = await axiosSecure.post("/check-users", { email: data.email, mobileNumber: data.mobileNumber });
+      const { emailExists, mobileNumberExists } = res.data;
 
       if (emailExists) {
         toast.error("Email already exists");
