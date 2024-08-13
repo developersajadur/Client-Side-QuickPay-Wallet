@@ -14,7 +14,7 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await axiosSecure.get("/users");
+      const res = await axiosSecure.get("/users" || []);
       const emailExists = res.data.some(user => user.email === data.email);
       const mobileNumberExists = res.data.some(user => user.mobileNumber === data.mobileNumber);
 
