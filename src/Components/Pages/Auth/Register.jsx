@@ -40,8 +40,16 @@ const Register = () => {
       }
       const response = await axios.post(`${api}/users`, dataToSend, );
       if (response.data.insertedId) {
-        toast.success('Successfully registered!');
-        navigate('/login'); // Redirect to login page
+        const token = response.data.token;
+        if (token) {
+          localStorage.setItem('token', token); // Store the token
+         if(localStorage.getItem('token') === token) {
+          toast.success('Successfully registered!');
+          navigate('/'); 
+         }
+        } else {
+          toast.error('Invalid credentials. Please try again.');
+        }
       }
     } catch (error) {
       toast.error('An error occurred. Please try again.');
