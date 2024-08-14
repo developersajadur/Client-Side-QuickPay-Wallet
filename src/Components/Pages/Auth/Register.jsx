@@ -42,7 +42,7 @@ const Register = () => {
       const response = await axios.post(`${api}/users`, dataToSend);
       if (response.data.token) {
         const token = response.data.token;
-        localStorage.setItem('token', token); // Store the token
+        localStorage.setItem('token', token); 
         toast.success('Successfully registered!');
         navigate('/'); 
       } else {
