@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../Loader/Loader';
 
 const api = import.meta.env.VITE_API_URL;
 
@@ -44,7 +45,7 @@ const SecureRoute = ({ children }) => {
 
   // Optionally show a loading spinner or similar while checking the token
   if (isValidToken === null) {
-    return <div>Loading...</div>;
+    return <Loader/>;
   }
 
   if (isValidToken) {

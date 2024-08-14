@@ -17,7 +17,7 @@ const BalanceCard = () => {
       <div className="bg-white shadow-md w-full md:w-1/2 lg:w-1/2 h-40 md:h-60 rounded-lg p-6 flex flex-col md:flex-row items-start justify-between">
         <div>
           <div className="text-gray-600">Your Wallet</div>
-          <div className="text-2xl font-bold">{user?.balance} BDT</div>
+          <div className="text-2xl font-bold">{user?.balance || 0} BDT</div>
         </div>
         {user.role === 'agent' ? null : (
           <div className="flex items-center" onClick={handleAddBalanceClick}>

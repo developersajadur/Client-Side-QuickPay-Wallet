@@ -1,50 +1,35 @@
+// src/pages/Register.js
 import { useForm } from 'react-hook-form';
-import { Label, TextInput, Button, Card, Alert } from 'flowbite-react';
+import { Label, TextInput, Button, Card, Alert, Select } from 'flowbite-react'; // Import Select from Flowbite
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
-import useAxiosSecure from '../../Hooks/useAxiosSecure';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; 
+import { useAuth } from '../../Hooks/useAuth';
 
 const api = import.meta.env.VITE_API_URL;
 
 const Register = () => {
-  const axiosSecure = useAxiosSecure();
+  const { login } = useAuth(); // Use login function from context
+  const navigate = useNavigate(); 
+
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const navigate = useNavigate(); // Initialize the navigate hook
 
   const onSubmit = async (data) => {
     try {
-      // Fetch all users using POST method
-      const res = await axiosSecure.post("/check-users", { email: data.email, mobileNumber: data.mobileNumber });
-      const { emailExists, mobileNumberExists } = res.data;
+      // Post request to the backend with the registration data
+      const response = await axios.post(`${api}/register`, {
+        ...data,
+        status: 'pending', // Set status to pending
+        balance: 0, // Set default balance to 0
+      });
 
-      if (emailExists) {
-        toast.error("Email already exists");
-        return;
-      }
-      
-      if (mobileNumberExists) {
-        toast.error("Mobile Number already exists");
-        return;
-      }
+      // Extract token from response
+      const token = response.data.token;
 
-      // Proceed with user registration
-      const dataToSend = {
-        name: data.name,
-        email: data.email,
-        mobileNumber: data.mobileNumber,
-        pin: data.pin,
-        balance: 0,
-        status: 'pending',
-        role: 'user',
-      }
-
-      const response = await axios.post(`${api}/users`, dataToSend);
-      if (response.data.token) {
-        const token = response.data.token;
-        localStorage.setItem('token', token); 
+      if (token) {
+        login(token); // Update context and local storage with the token
         toast.success('Successfully registered!');
-        navigate('/'); 
+        navigate('/'); // Navigate to home page on successful registration
       } else {
         toast.error('Error registering user. Please try again.');
       }
@@ -90,6 +75,19 @@ const Register = () => {
             {errors.mobileNumber && <Alert color="red">{errors.mobileNumber.message}</Alert>}
           </div>
           <div>
+            <Label htmlFor="role" value="Account Type" />
+            <Select
+              id="role"
+              {...register('role', { required: 'Account type is required' })}
+              placeholder="Select account type"
+            >
+              <option disabled selected value="null">Select</option>
+              <option value="user">User</option>
+              <option value="agent">Agent</option>
+            </Select>
+            {errors.role && <Alert color="red">{errors.role.message}</Alert>}
+          </div>
+          <div>
             <Label htmlFor="pin" value="5-digit PIN" />
             <TextInput
               id="pin"
@@ -105,6 +103,9 @@ const Register = () => {
           </div>
           <Button className="bg-blue-500 w-full" type="submit">Register</Button>
         </form>
+        <div className="text-center mt-4">
+          <p className='text-blue-500'>Already Have An Account? <Link className='font-semibold' to='/login'>Click Here</Link></p>
+        </div>
       </Card>
     </div>
   );

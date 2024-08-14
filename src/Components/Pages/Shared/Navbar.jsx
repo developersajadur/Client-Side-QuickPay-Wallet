@@ -46,7 +46,7 @@ const Navbar = () => {
           </Link>
           <div className="flex items-center gap-10">
             <div className="">
-              <h2 className="text-xl font-medium">{`Hi, ${user?.name}`}</h2>
+              <h2 className="text-xl font-medium">{`Hi, ${user?.name || "Name Not Found"}`}</h2>
             </div>
             <div className="">
               <Button
@@ -74,7 +74,7 @@ const Navbar = () => {
               <Drawer.Items>
                 <div className="flex flex-col gap-5">
                     <img src="" alt="" />
-                    <h2 className="text-xl font-medium">{`Hi, ${user?.name}`}</h2>
+                    <h2 className="text-xl font-medium">{`Hi, ${user?.name || "Name Not Found"} `}</h2>
               <div className="">
               <Button
                 onClick={handleLogout}

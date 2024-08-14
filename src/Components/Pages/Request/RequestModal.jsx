@@ -52,28 +52,36 @@ const RequestModal = ({ show, onClose }) => {
         <div className="h-96 overflow-auto">
           <Table hoverable>
             <Table.Body className="divide-y">
-              {requests.map((request, index) => {
-                const date = new Date(request.date).toLocaleString(); // Corrected here
-                return (
-                  <Table.Row key={index}>
-                    <Table.Cell className="flex justify-between items-center">
-                      <p className="text-base font-medium">
-                        {`You Have A ${request.amount} BDT Cash In Request From ${request.fromUser} On ${date}`}
-                      </p>
-                      <div className="bg-blue-500 w-fit">
-                        <Dropdown
-                          label="Options"
-                          dismissOnClick={false}
-                          className="w-fit rounded-md shadow-md"
-                        >
-                          <Dropdown.Item onClick={() => handleRequestAction(request.fromUser, request.amount, 'approve')}>Approve</Dropdown.Item>
-                          <Dropdown.Item onClick={() => handleRequestAction(request.fromUser, request.amount, 'deny')}>Deny</Dropdown.Item>
-                        </Dropdown>
-                      </div>
-                    </Table.Cell>
-                  </Table.Row>
-                );
-              })}
+              {requests.length === 0 ? (
+                <Table.Row>
+                  <Table.Cell colSpan="3">
+                    <h1 className="text-center text-3xl font-bold">No requests found!</h1>
+                  </Table.Cell>
+                </Table.Row>
+              ) : (
+                requests.map((request, index) => {
+                  const date = new Date(request.date).toLocaleString(); // Format date
+                  return (
+                    <Table.Row key={index}>
+                      <Table.Cell className="flex justify-between items-center">
+                        <p className="text-base font-medium">
+                          {`You have a ${request.amount} BDT cash request from ${request.fromUser} on ${date}`}
+                        </p>
+                        <div className="bg-blue-500 w-fit">
+                          <Dropdown
+                            label="Options"
+                            dismissOnClick={false}
+                            className="w-fit rounded-md shadow-md"
+                          >
+                            <Dropdown.Item onClick={() => handleRequestAction(request.fromUser, request.amount, 'approve')}>Approve</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleRequestAction(request.fromUser, request.amount, 'deny')}>Deny</Dropdown.Item>
+                          </Dropdown>
+                        </div>
+                      </Table.Cell>
+                    </Table.Row>
+                  );
+                })
+              )}
             </Table.Body>
           </Table>
         </div>
