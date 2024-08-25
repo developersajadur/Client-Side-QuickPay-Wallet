@@ -48,6 +48,7 @@ const Navbar = () => {
             <div className="">
               <h2 className="text-xl font-medium">{`Hi, ${user?.name || "Name Not Found"}`}</h2>
             </div>
+            <Link to='/admin' className="bg-red-500 py-2 px-2 rounded-lg text-center text-white font-medium">Dashboard</Link>
             <div className="">
               <Button
                 onClick={handleLogout}
@@ -75,6 +76,7 @@ const Navbar = () => {
                 <div className="flex flex-col gap-5">
                     <img src="" alt="" />
                     <h2 className="text-xl font-medium">{`Hi, ${user?.name || "Name Not Found"} `}</h2>
+                    <Link to='/admin' className="bg-red-500 py-2 px-2 text-center rounded-lg text-white font-medium">Dashboard</Link>
               <div className="">
               <Button
                 onClick={handleLogout}

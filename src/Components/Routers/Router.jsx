@@ -5,35 +5,44 @@ import Login from "../Pages/Auth/Login";
 import HomePage from "../Pages/Home/HomePage";
 import SecureRoute from "../SecureRoutes/SecureRoute";
 import WalletCards from "../Pages/WalletCards/WalletCards";
+import AdminRoot from "../Admin/AdminLayout/AdminRoot";
+import AllTranslations from "../Admin/AllTranslations/AllTranslations";
+import AllUser from "../Admin/AllUser/AllUser";
+import Dashboard from "../Admin/Dashboard/Dashboard";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element:<SecureRoute> <Root /></SecureRoute>,
+    element: (
+      <SecureRoute>
+        <Root />
+      </SecureRoute>
+    ),
     children: [
       {
         path: "/",
-        element:<HomePage />,
+        element: <HomePage />,
       },
-      // {
-      //   path: "/withdraw",
-      //   element:<Withdraw/>,
-      // },
       {
         path: "/cards",
-        element:<WalletCards/>,
+        element: <WalletCards />,
       },
+      // Uncomment and add other routes here
+      // {
+      //   path: "/withdraw",
+      //   element: <Withdraw />,
+      // },
       // {
       //   path: "/transactions",
-      //   element:<TransactionModal/>,
+      //   element: <TransactionModal />,
       // },
       // {
       //   path: "/add-money",
-      //   element:<AddMoney/>,
+      //   element: <AddMoney />,
       // },
       // {
       //   path: "/sent-money",
-      //   element:<SendMoney/>,
+      //   element: <SendMoney />,
       // },
     ],
   },
@@ -44,5 +53,27 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/admin",
+    element: (
+      <SecureRoute>
+        <AdminRoot />
+      </SecureRoute>
+    ),
+    children: [
+      {
+        path: 'dashboard',
+        element: <Dashboard/>
+      },
+      {
+        path: 'translations',
+        element: <AllTranslations/>
+      },
+      {
+        path: 'users',
+        element: <AllUser/>
+      },
+    ],
   },
 ]);
