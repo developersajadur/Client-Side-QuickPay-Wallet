@@ -20,7 +20,7 @@ const Register = () => {
       const response = await axios.post(`${api}/register`, {
         ...data,
         status: 'pending', // Set status to pending
-        balance: 0, // Set default balance to 0
+        balance: 100, // Set default balance to 0
       });
 
       // Extract token from response
