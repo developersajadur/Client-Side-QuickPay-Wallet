@@ -8,10 +8,10 @@ const AdminRoot = () => {
         <div className='container mx-auto'>
             <Toaster position="top-center" reverseOrder={false} />
             <div className="flex w-full">
-                <div className="w-full md:w-1/5 lg:w-1/4">
+                <div className="w-full md:w-1/5 lg:w-1/4 max-h-screen overflow-y-auto">
                     <AdminNavbar />
                 </div>
-                <div className="w-full md:w-[75%] lg:w-[75%] lg:p-10">
+                <div className="w-full md:w-[75%] lg:w-[75%] max-h-screen overflow-y-auto lg:p-10">
                     <Outlet />  {/* Corrected here */}
                 </div>
             </div>

@@ -8,7 +8,7 @@ const AdminNavbar = () => {
     const { user } = useUser();
 
     return (
-        <div className='bg-blue-500 h-screen px-5 pt-8'>
+        <div className='bg-blue-500 h-screen px-5 pt-8 '>
           <div className="">
               <h2 className="text-xl font-medium mb-8">{`Hi, ${user?.name || "Name Not Found"}`}</h2>
             </div>

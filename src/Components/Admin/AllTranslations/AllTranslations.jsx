@@ -18,13 +18,11 @@ const AllTranslations = () => {
 
     return (
         <div className="p-4">
-            {
-                transactions.length === 0 && (
-                    <div className="flex items-center justify-center py-12">
-                        <span className="text-xl font-semibold">No Transactions Found.</span>
-                    </div>
-                )
-            }
+            {transactions.length === 0 && (
+                <div className="flex items-center justify-center py-12">
+                    <span className="text-xl font-semibold">No Transactions Found.</span>
+                </div>
+            )}
             <h2 className="text-2xl font-semibold mb-4">All Transactions</h2>
             <Table hoverable={true}>
                 <Table.Head>
@@ -38,9 +36,9 @@ const AllTranslations = () => {
                     {transactions.map((transaction, index) => (
                         <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                             <Table.Cell>{new Date(transaction.date).toLocaleDateString()}</Table.Cell>
-                            <Table.Cell>{transaction.senderNumber ?? 'Not Found'}</Table.Cell>
-                            <Table.Cell>{transaction.receiverNumber ?? 'Not Found'}</Table.Cell>
-                            <Table.Cell>{transaction.totalAmount} BDT</Table.Cell>
+                            <Table.Cell>{transaction.senderNumber || transaction.toAgent || transaction.fromUser || 'Not Found'}</Table.Cell>
+                            <Table.Cell>{transaction.receiverNumber || transaction.toUser ||  transaction.toAgent || 'Not Found'}</Table.Cell>
+                            <Table.Cell>{transaction.totalAmount ?? transaction.amount} BDT</Table.Cell>
                             <Table.Cell>{transaction.type}</Table.Cell>
                         </Table.Row>
                     ))}
